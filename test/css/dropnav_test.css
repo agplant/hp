@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+@import url("cssreset-min.css");
+
+/* 変数宣言 */
+:root {
+  --nav-height: 70px;
+  --content-width: 1000px;
+  --breakpoint: 799px;
+  --nav-background: #262626;
+  --nav-font-color: #ffffff;
+  --link-hover-color: #2581DC;
+}
+
+.navigation {
+  height: var(--nav-height);
+  background: var(--nav-background);
+  /* border: 1px solid red;
+  padding: 0px;
+  margin: 0px; */
+}
+
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  /* float: left; */
+  line-height: var(--nav-height);
+  text-transform: uppercase;
+  font-size: 1.4em;
+}
+
+.brand a,a:visited {
+  color: var(--nav-font-color);
+  text-decoration: none;  
+}
+
+.nav-container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* nav要素配下をflexとし、右寄せにする */
+/* nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+} */
+
+nav ul, li {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  /* justify-content: flex-end; */
+}
+
+.nav-a {
+  /* display: block; */
+  padding: 0 20px;
+  line-height: var(--nav-height);
+  background: var(--nav-background);
+  color: var(--nav-font-color);
+  text-decoration: none;
+}
+
+.nav-a:hover {
+  background: var(--link-hover-color);
+  color: var(--nav-font-color);
+  text-decoration: none;
+}
+
+.nav-mobile {
+  display: none;
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--nav-background);
+  height: var(--nav-height);
+  width: var(--nav-height); */
+}
+
+@media screen and (max-width: 768px) {
+
+  /* メニューをラップしている要素 */
+  .nav-mobile {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--nav-background);
+    height: var(--nav-height);
+    width: var(--nav-height);
+  }
+  
+  /* nav全てをラップしている要素 */
+  nav {
+    width: 100%;
+    padding: var(--nav-height) 0 15px;
+    display: block;
+  }
+  nav ul {
+    display: none;
+  }
+  nav li {
+    flex-direction: column;
+  }
+
+  .nav-a {
+    padding: 15px;
+    line-height: 20px;
+    /* padding-left: 30px; */
+  }
+
+  /* nav-mobile（右上に寄ってる）内での位置決め */
+  /* ハンバーガーメニューとかアコーディオンとか呼んだりする */
+  #nav-toggle {
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    cursor: pointer;
+    padding: 10px 35px 16px 0px;
+  }
+
+  /* spanを利用して三本線を引く */
+  #hamburger-line,
+  #hamburger-line:before,
+  #hamburger-line:after
+  {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: var(--nav-font-color);
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 300ms ease-in-out;
+  }
+  #hamburger-line:before {
+    top: -10px;
+  }
+  #hamburger-line:after {
+    bottom: -10px;
+  }
+  
+  /* ハンバーガーがタップされた場合は×印にチェンジ */
+  #nav-toggle.active span {
+    background-color: transparent;
+  }
+  #nav-toggle.active span:before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  #nav-toggle.active span:after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+@media screen and (min-width: 768px) {
+ 
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  /* .nav-list {
+    display: flex;
+    flex-direction: row;
+  } */
+}
+

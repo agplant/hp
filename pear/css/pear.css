@@ -1,0 +1,428 @@
+@charset "UTF-8";
+
+@import url("../../common/css/cssreset-min.css");
+
+/* 変数宣言 */
+:root {
+  --header-sp-height: 60px;
+  --header-pc-height: 15vh;
+
+  --content-sp-height: 85vh;
+  --footer-sp-height: 30px;
+
+  --content-sp-width: 96%;
+  --content-pc-width: 80%;
+
+  --nav-main-color: #1b5e20;
+  --nav-sub-color: #fff;
+  --nav-back-color: #fff;
+
+  --break-point-sp: 768px;
+  --footer-back-color: #3E2723;
+  /* #e0e0e0; */
+  --min-width-sp: 300px;
+
+  --icon-width: 30px;
+  --space: 3%;
+
+  --harvest-width: 350px;
+}
+
+/* 
+
+共通
+
+*/
+* {
+  font-size: 0.9rem;
+  font-family: Verdana, Roboto, "Droid Sans", "游ゴシック", YuGothic, "メイリオ", Meiryo, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+.icon {
+  color: var(--nav-main-color);
+  width: var(--icon-width);
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin-top: var(--space); 
+}
+
+/* 
+
+ヘッダ
+
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+header {
+  /* 位置 */
+  position: fixed;
+  top: 0;
+
+  /* サイズ */
+  width: 100%;
+  min-width: var(--min-width-sp);
+  height: var(--header-sp-height);
+  
+  padding: 3%;
+  
+  /* 子要素の表示指定 */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  z-index: 100;
+  background-color: #FFF;
+}
+
+.logo {
+  color: var(--nav-main-color);
+  
+  font-size: 1.3rem;
+  min-width: 8rem;
+}
+
+@media (min-width: 768px) { 
+  header {
+    height: var(--header-pc-height);
+  }
+
+  .logo {
+    font-size: 2rem;
+    min-width: 11rem;
+  }
+}
+
+/* 
+
+ナビゲーション
+
+*/
+.menu button svg, .menu button .desc {
+  /* この要素のイベント無効化
+  buttonを押した際に載せているsvgやdescが反応してしまう */
+  pointer-events: none;
+}
+
+.menu {
+  width: 100%;
+}
+
+.menu ul {
+  width: 100%;
+  /* padding-right: 10%; */
+  display: flex;
+  justify-content: center;
+}
+
+.navitem {
+  width: 20%;
+  margin-left: var(--space);
+}
+
+.navitem .tab-button {
+  width: 100%;
+  min-width: 40px;
+  max-width: 60px;
+  border: 2px solid var(--nav-main-color);
+  border-radius: 3px;
+  padding: 4px 0px;
+  transition: .4s;
+  background: var(--nav-sub-color);
+	color: var(--nav-main-color);
+}
+
+@media (min-width: 768px) { 
+  
+  .menu ul {
+    /* width: 100%; */
+    padding-right: 10%;
+  }
+
+  .navitem {
+    width: 10%;
+  }
+
+  .navitem .tab-button {
+    max-width: 100px;
+  }
+
+  .navitem .desc {
+    font-size: 0.5rem;
+  }
+}
+
+.navitem .tab-button:hover {
+  background: var(--nav-main-color);
+  color: var(--nav-sub-color);
+  /* cursor: pointer; 効いてない？*/
+}
+
+/* svgはfillしないと色が適用されない */
+.navitem-img {
+  width: 20px;
+  height: 20px;
+  fill: var(--nav-main-color);
+  transition: .4s;
+}
+
+/* hoverをきっかけに配下の要素も変化させる
+隣接要素の場合は"+"を使うので注意 */
+.navitem .tab-button:hover > .navitem-img {
+  fill: var(--nav-sub-color);
+}
+
+.navitem .desc {
+  font-size: 0.5rem;
+}
+
+/* 
+
+内容
+
+*/
+
+.content {
+  width: var(--content-sp-width);
+  margin: 0px auto;
+  margin-top: var(--header-sp-height);
+}
+
+@media (min-width: 768px) { 
+  .content {
+    width: var(--content-pc-width);
+    margin-top: var(--header-pc-height);
+  }
+}
+
+.tab-content {
+  display: none;
+}
+
+.signboard {
+  position: relative;
+  
+  height: 200px;
+}
+
+.signboard img {
+  position: absolute;
+  
+  height: 200px; 
+  object-fit: cover;
+}
+
+#slideshow {
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+}
+
+.signboard-str1, .signboard-str2 {
+  position: absolute;
+  left: 50%;
+  transform: translateY(0%) translateX(-50%);
+
+  /* width: 100%; */
+  white-space: nowrap;
+  /* text-align: center; */
+
+  color: #fff;
+  font-size: 1.2rem;
+  background-color: rgba(5, 145, 52, 0.7);
+}
+
+.signboard-str1 {
+  top: 90px;
+}
+.signboard-str2 {
+  top: 150px;
+}
+
+.history {
+  margin-top: var(--space);
+}
+.history-row {
+  margin-top: 10px;
+}
+.history-new {
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius:5px;
+  color: white;
+  background-color: red;
+}
+.history-important {
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius:5px;
+  color: yellow;
+  background-color: black;
+}
+.title {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.stripe{ 
+  position: relative;
+  padding: 0.5em;
+}
+.stripe:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(-45deg, skyblue, skyblue 2px, white 2px, white 4px);
+}
+
+.farm-owner {
+  margin-right: 3%;
+}
+
+.farm-owner img {
+  height: 150px;
+
+  object-fit: cover;
+}
+.farm-owner-desc {
+  text-align: center;
+}
+.about {
+  display: flex;
+  flex-direction: row;
+}
+
+.harvest {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: var(--space);
+  width: var(--harvest-width);
+}
+.harvest-header {
+  display: flex;
+  width: var(--harvest-width);
+}
+
+div[class*="harvest-row"] {
+  display: flex;
+  width: var(--harvest-width);
+}
+.harvest-name {
+  width: 60px;
+}
+div[class*="harvest-month"] {
+  width: 60px;
+}
+div[class*="harvest-col"] {
+  width: 20px;
+  height: 20px;
+  border-bottom: 1px solid #BDBDBD;
+}
+div[class*="harvest-target-0"] {
+  background-color: orange;
+}
+div[class*="harvest-target-1"] {
+  background-color: red;
+}
+div[class*="harvest-target-2"] {
+  background-color: green;
+}
+div[class*="harvest-target-3"] {
+  background-color: blue;
+}
+div[class*="harvest-period"] {
+  border-left: 1px solid #BDBDBD;
+}
+div[class*="harvest-end"] {
+  border-right: 1px solid #BDBDBD;
+}
+
+.price-ref {
+  margin-top: var(--space);
+}
+
+.price-ref table {
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+.price-ref th {
+  text-align: center;
+  border-bottom: solid 2px #F9A825;
+}
+.price-ref td {
+  border-bottom: solid 2px #e0e0e0;
+}
+
+.price-ref .yen {
+  text-align: right;
+}
+/* アドレスのアイコンと内容の段組み合わせる */
+.address-parent{
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.address-content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 1%;
+  /* border: 1px solid #000; */
+}
+
+.btn-square-shadow {
+  /* display: inline-block; */
+  padding: 0.5em 1em;
+  /* text-decoration: none; */
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+.btn-square-shadow:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+  border-bottom: none;
+}
+
+/* 
+
+フッター
+
+*/
+footer {
+
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  height: var(--footer-sp-height);
+
+  padding-left: var(--space);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+
+  background-color: var(--footer-back-color);
+  color: #FBC02D;
+}
+
+footer * {
+  margin-right: var(--space);
+}

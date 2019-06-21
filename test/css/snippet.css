@@ -1,0 +1,136 @@
+
+/* 背景を全画面にする */
+background {
+  background-image: url("../img/background1.JPG");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
+/* 画面をいい感じにする */
+image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+
+/* 
+SVGの知識
+https://ferret-plus.com/7522 
+https://qiita.com/yamamiweb/items/011d6b264a5af568783b
+http://defghi1977.html.xdomain.jp/tech/svgMemo/svgMemo_09.htm
+*/
+/* svgはfillしないと色が適用されない */
+.navitem-img {
+  width: 20px;
+  height: 20px;
+  fill: var(--nav-main-color);
+  transition: .4s;
+}
+
+/* hoverをきっかけに配下の要素も変化させる
+隣接要素の場合は"+"を使うので注意 */
+.navitem .tab-button:hover > .navitem-img {
+  fill: var(--nav-sub-color);
+}
+
+/* 上下中央にする
+親要素をrelativeにする
+子要素を以下にする
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+*/
+
+/* 
+awesome使う！！
+https://saruwakakun.com/html-css/basic/font-awesome */
+.awesome {
+  color: var(--nav-main-color);
+  /* margin-right: 10px; */
+  /* font-family: "Font Awesome 5 Free";
+  content: "\f00c";
+  font-weight: 900;
+  padding-right: 5px;
+  color: #f89174; */
+}
+
+/* 
+
+背景がふわっと出てくる
+
+*/
+/* <!-- <div class="background-container">
+        <svg version="1.1" id="background" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <defs>
+            <linearGradient id="background-gradient" gradientTransform="rotate(45)">
+              <stop class="start" offset="0%"/>
+              <stop class="end" offset="100%"/>
+            </linearGradient>
+          </defs>
+          <g>
+            <path class="st0" d="M415.957,13.891c-21.891-17.438-56.984-19-87.359-1.594c-30.375,17.391-46.766,48.438-42.813,76.141
+              c21.875,17.453,56.984,19.016,87.359,1.609C403.519,72.625,419.91,41.609,415.957,13.891z"></path>
+            <path class="st0" d="M439.316,178.406c-57.844-67.484-121.829-40.469-161.235-28.547V95.313c0-11.688-9.484-21.156-21.172-21.156
+              s-21.156,9.469-21.156,21.156v55.078c-39.219-11.578-104.313-40.531-163.078,28.016C0.55,262.563,51.644,512,255.988,512
+              C460.363,512,511.457,262.563,439.316,178.406z"></path>
+          </g>
+        </svg>
+      </div> --> */
+/* fill: #EC407A; */
+/* .background-container {
+  width: 100%;
+  text-align: center;
+}
+#background {
+  width: 400px;
+  height: 400px;
+  
+  fill: url("#background-gradient");
+  fill-opacity: 0.2;
+  animation: back-animation ease-in-out 3s;
+}
+ #background-gradient .start {
+  stop-color: green;
+}
+
+#background-gradient .end {
+  stop-color: white;
+}
+
+@keyframes back-animation {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 0.2;
+  }
+} */
+
+
+/* フォント */
+/* https://blog.codecamp.jp/css-font-family *
+
+
+/* チャート */
+  /* <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+  <!-- <script src="../lib/chart.js/dist/Chart.js"></script> -->/ */
+
+
+  /* bootstrap4 */
+/*   headの中
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> */
+/*   /bodyの直前
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> */
+
+/* メールフォーム
+  https://its-office.jp/blog/php/2017/05/28/phpmailer.html */
