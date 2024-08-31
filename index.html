@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>料金計算ツール</title>
+    <title>一戦場梨園料金計算ツール</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <h1>料金計算ツール</h1>
+    <h1>一戦場梨園料金計算ツール</h1>
 
     <form id="rateForm">
         <label for="grade">種類:</label>
@@ -147,6 +147,11 @@
                 const rateType = document.getElementById('rateType').value;
                 const rate = shippingRates[prefecture][rateType][weight];
                 total += rate;
+
+                // 割引
+                if (weight === "5kg" && grade === 1) {
+                    total -= 50;
+                }
             }
 
             document.getElementById('result').textContent = `合計金額: ${total}円`;
