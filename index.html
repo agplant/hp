@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>料金計算ツール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>料金計算ツール</h1>
+
+    <form id="rateForm">
+      
+      <label for="weight">種類:</label>
+        <select id="weight" name="weight">
+            <option value="1">1級品</option>
+            <option value="2">2級品</option>
+        </select>
+      
+        <label for="weight">重量:</label>
+        <select id="weight" name="weight">
+            <option value="5kg">5キロ</option>
+            <option value="10kg">10キロ</option>
+        </select>
+
+      <label for="prefecture">県名:</label>
+        <select id="prefecture" name="prefecture" required></select>
+      
+        <label for="rateType">料金タイプ:</label>
+        <select id="rateType" name="rateType">
+            <option value="normal">通常便</option>
+            <option value="cool">クール便</option>
+        </select>
+
+        <button type="submit">計算する</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const shippingRates = {
+            '北海道': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '青森': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '岩手': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '秋田': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '宮城': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '山形': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '福島': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '茨城': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '栃木': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '群馬': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '埼玉': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '東京': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '神奈川': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '山梨': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '新潟': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '長野': { normal: { '5kg': 1000, '10kg': 1100 }, cool: { '5kg': 1440, '10kg': 1815 } },
+            '富山': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '石川': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '福井': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '岐阜': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '静岡': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '愛知': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '三重': { normal: { '5kg': 1100, '10kg': 1200 }, cool: { '5kg': 1540, '10kg': 1915 } },
+            '滋賀': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '京都': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '大阪': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '兵庫': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '奈良': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '和歌山': { normal: { '5kg': 1200, '10kg': 1300 }, cool: { '5kg': 1640, '10kg': 2015 } },
+            '鳥取': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '島根': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '岡山': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '広島': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '山口': { normal: { '5kg': 1300, '10kg': 1400 }, cool: { '5kg': 1740, '10kg': 2115 } },
+            '徳島': { normal: { '5kg': 1400, '10kg': 1500 }, cool: { '5kg': 1840, '10kg': 2215 } },
+            '香川': { normal: { '5kg': 1400, '10kg': 1500 }, cool: { '5kg': 1840, '10kg': 2215 } },
+            '愛媛': { normal: { '5kg': 1400, '10kg': 1500 }, cool: { '5kg': 1840, '10kg': 2215 } },
+            '高知': { normal: { '5kg': 1400, '10kg': 1500 }, cool: { '5kg': 1840, '10kg': 2215 } },
+            '福岡': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '佐賀': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '長崎': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '熊本': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '大分': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '宮崎': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '鹿児島': { normal: { '5kg': 1500, '10kg': 1700 }, cool: { '5kg': 1940, '10kg': 2415 } },
+            '沖縄': { normal: { '5kg': 3100, '10kg': 3400 }, cool: { '5kg': 3540, '10kg': 4115 } }
+        };
+
+      const baseRates = {
+            '5kg': { '1': 2750, '2': 1500 },
+            '10kg': { '1': 5500, '2': 3000 }
+        };
+
+        const boxFee = 300;
+
+        // 都道府県のセレクトボックスを動的に生成
+        const prefectureSelect = document.getElementById('prefecture');
+        Object.keys(shippingRates).forEach(pref => {
+            const option = document.createElement('option');
+            option.value = pref;
+            option.textContent = pref;
+            prefectureSelect.appendChild(option);
+        });
+      
+        const form = document.getElementById('rateForm');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const prefecture = document.getElementById('prefecture').value;
+            const weight = document.getElementById('weight').value;
+          const grade = document.getElementById('grade').value;
+            const rateType = document.getElementById('rateType').value;
+
+            if (shippingRates[prefecture]) {
+                const baseRate = baseRates[weight][grade];
+                const totalRate = baseRate + boxFee;
+              
+                const rate = shippingRates[prefecture][rateType][weight];
+                const total = totalRate + rate;
+                document.getElementById('result').textContent = `合計金額: ${total}円`;
+            } else {
+                document.getElementById('result').textContent = '指定された県名が無効です。';
+            }
+        });
+    </script>
+
+</body>
+</html>
