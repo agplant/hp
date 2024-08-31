@@ -142,16 +142,16 @@
 
             let total = totalRate;
 
+            // 割引
+            if (weight === "5kg" && grade === 1) {
+                total -= 50;
+            }
+            
             // prefectureが選択されている場合は、rateTypeを含めて計算
             if (prefecture) {
                 const rateType = document.getElementById('rateType').value;
                 const rate = shippingRates[prefecture][rateType][weight];
-                total += rate;
-
-                // 割引
-                if (weight === "5kg" && grade === 1) {
-                    total -= 50;
-                }
+                total += rate;    
             }
 
             document.getElementById('result').textContent = `合計金額: ${total}円`;
