@@ -134,18 +134,20 @@
             const prefecture = document.getElementById('prefecture').value;
             const weight = document.getElementById('weight').value;
             const grade = document.getElementById('grade').value;
-            const rateType = document.getElementById('rateType').value;
 
-            if (shippingRates[prefecture]) {
-                const baseRate = baseRates[weight][grade];
-                const totalRate = baseRate + boxFee;
+            const baseRate = baseRates[weight][grade];
+            const totalRate = baseRate + boxFee;
 
+            let total = totalRate;
+
+            // prefectureが選択されている場合は、rateTypeを含めて計算
+            if (prefecture) {
+                const rateType = document.getElementById('rateType').value;
                 const rate = shippingRates[prefecture][rateType][weight];
-                const total = totalRate + rate;
-                document.getElementById('result').textContent = `合計金額: ${total}円`;
-            } else {
-                document.getElementById('result').textContent = '指定された県名が無効です。';
+                total += rate;
             }
+
+            document.getElementById('result').textContent = `合計金額: ${total}円`;
         });
     </script>
 
