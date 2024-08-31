@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <h1>一戦場梨園料金計算ツール2229</h1>
+    <h1>一戦場梨園料金計算ツール2231</h1>
 
     <form id="rateForm">
         <label for="grade">種類:</label>
@@ -143,11 +143,8 @@
             let total = totalRate;
 
             // 割引
-            console.log(weight, grade);
             if (weight === "5kg" && grade === "1") {
-                console.log("before", total);
                 total -= 50;
-                console.log("after", total);
             }
             
             // prefectureが選択されている場合は、rateTypeを含めて計算
