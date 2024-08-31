@@ -35,22 +35,21 @@
     <h1>料金計算ツール</h1>
 
     <form id="rateForm">
-      
-      <label for="weight">種類:</label>
-        <select id="weight" name="weight">
+        <label for="grade">種類:</label>
+        <select id="grade" name="grade">
             <option value="1">1級品</option>
             <option value="2">2級品</option>
         </select>
-      
+
         <label for="weight">重量:</label>
         <select id="weight" name="weight">
             <option value="5kg">5キロ</option>
             <option value="10kg">10キロ</option>
         </select>
 
-      <label for="prefecture">県名:</label>
+        <label for="prefecture">県名:</label>
         <select id="prefecture" name="prefecture" required></select>
-      
+
         <label for="rateType">料金タイプ:</label>
         <select id="rateType" name="rateType">
             <option value="normal">通常便</option>
@@ -127,20 +126,20 @@
             option.textContent = pref;
             prefectureSelect.appendChild(option);
         });
-      
+
         const form = document.getElementById('rateForm');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
             const prefecture = document.getElementById('prefecture').value;
             const weight = document.getElementById('weight').value;
-          const grade = document.getElementById('grade').value;
+            const grade = document.getElementById('grade').value;
             const rateType = document.getElementById('rateType').value;
 
             if (shippingRates[prefecture]) {
                 const baseRate = baseRates[weight][grade];
                 const totalRate = baseRate + boxFee;
-              
+
                 const rate = shippingRates[prefecture][rateType][weight];
                 const total = totalRate + rate;
                 document.getElementById('result').textContent = `合計金額: ${total}円`;
